@@ -7,11 +7,15 @@ EXPORT_PATH = "saved_images"
 images = []
 count = 0
 CSV.foreach(CSV_PATH, row_sep: :auto, headers: true) do |row|
-  images << {
-    url: row[28],
-    part_number: row[155].gsub("@", "")
-  }
-  count += 1
+  urls = row[28].split(",")
+  urls.each_with_index do |url, index|
+    images << {
+      url: row[28],
+      part_number: row[155].gsub("@", "") + (index == 0 ? "" : index + 1)
+    }
+    count += 1
+  end
+
   break if count > 10
 end
 
