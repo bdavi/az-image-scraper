@@ -11,7 +11,7 @@ CSV.foreach(CSV_PATH, row_sep: :auto, headers: true) do |row|
   urls.each_with_index do |url, index|
     images << {
       url: row[28],
-      part_number: row[155].gsub("@", "") + (index == 0 ? "" : index + 1)
+      part_number: row[155].gsub("@", "") + (index == 0 ? "" : "-" + index + 1)
     }
     count += 1
   end
